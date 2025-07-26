@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/AlfitPro.iml" filepath="$PROJECT_DIR$/.idea/AlfitPro.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../fitness/fitness.iml" filepath="$PROJECT_DIR$/../fitness/fitness.iml" />
+      <module fileurl="file://$PROJECT_DIR$/userservices/fitness (1).iml" filepath="$PROJECT_DIR$/userservices/fitness (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/../fitness/fitness (2).iml" filepath="$PROJECT_DIR$/../fitness/fitness (2).iml" />
+    </modules>
+  </component>
+</project>
