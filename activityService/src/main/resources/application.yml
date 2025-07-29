@@ -3,9 +3,13 @@ server:
 
 spring:
   application:
-    name: activityService
+    name: activity-service
 
   data:
     mongodb:
       uri: mongodb://localhost:27017/fitnessactivity
       database: fitnessactivity
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
