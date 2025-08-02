@@ -31,4 +31,5 @@ public class ActivityController {
     public ResponseEntity<ActivityResponse> getActivity( @PathVariable String activityId){
         return ResponseEntity.ok(activityService.getActivityById(activityId));
     }
+
 }
