@@ -6,6 +6,8 @@ import com.fitness.activityService.dto.ActivityResponse;
 import com.fitness.activityService.model.Activity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,11 +20,19 @@ public class ActivityService {
 
     private final ActivityRepository activityRepository;
     private final UservalidationService uservalidationService;
+    private final RabbitTemplate rabbitTemplate;
+
+    @Value("${rabbitmq.exchange.name}")
+    private String exchange;
+
+    @Value("${rabbitmq.routing.key}")
+    private String routingKey;
 
     public ActivityResponse trackActivity(ActivityRequest request) {
 
         boolean isValidUser = uservalidationService.validateUser(request.getUserId());
         if(!isValidUser) throw new RuntimeException("Invalid User" + request.getUserId());
+
         Activity activity  = Activity.builder()
                 .userId(request.getUserId())
                 .type(request.getType())
@@ -33,8 +43,15 @@ public class ActivityService {
                 .additionalMetrics(request.getAdditionalMetrics())
                 .build();
         Activity saveActivity = activityRepository.save(activity);
-
         log.info("Activity saved Successfully activityId: {}",activity.getId());
+
+        try{
+            rabbitTemplate.convertAndSend(exchange, routingKey,saveActivity);
+
+        }catch(Exception e){
+            log.info("Failed to publish activity");
+        }
+
         return mapToResponse(saveActivity);
     }
 
@@ -67,7 +84,7 @@ public class ActivityService {
     }
 
     public ActivityResponse getActivityById(String activityId) {
-        log.info("\nCall for activity if id : {}",activityId);
+        log.info("\n Call for activity if id : {}",activityId);
     return activityRepository.findById(activityId)
             .map(this::mapToResponse)
             .orElseThrow(()->new RuntimeException("No Such Activity Found!"));
