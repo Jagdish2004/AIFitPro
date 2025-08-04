@@ -23,7 +23,7 @@ public class UservalidationService {
                     .uri("api/user/{userId}/validate", userId)
                     .retrieve().bodyToMono(Boolean.class)
                     .block();
-            log.info("user validation called ---<");
+            log.info("user validation called ");
             return block;
 
         }catch(WebClientResponseException e){

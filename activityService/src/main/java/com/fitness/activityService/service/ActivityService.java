@@ -47,6 +47,7 @@ public class ActivityService {
 
         try{
             rabbitTemplate.convertAndSend(exchange, routingKey,saveActivity);
+            log.info("rabbit mq called");
 
         }catch(Exception e){
             log.info("Failed to publish activity");
