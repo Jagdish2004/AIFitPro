@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="eureka" />
+        <module name="configServer" />
         <module name="AiSuggestionService" />
       </profile>
       <profile name="Annotation profile for activityService" enabled="true">
@@ -31,6 +32,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="AiSuggestionService" options="-parameters" />
       <module name="activityService" options="-parameters" />
+      <module name="configServer" options="-parameters" />
       <module name="eureka" options="-parameters" />
       <module name="fitness" options="-parameters" />
       <module name="fitness (1)" options="-parameters" />
