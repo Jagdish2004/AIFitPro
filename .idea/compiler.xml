@@ -7,9 +7,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="apiGateway" />
+        <module name="AiSuggestionService" />
         <module name="eureka" />
         <module name="configServer" />
-        <module name="AiSuggestionService" />
       </profile>
       <profile name="Annotation profile for activityService" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -32,6 +33,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="AiSuggestionService" options="-parameters" />
       <module name="activityService" options="-parameters" />
+      <module name="apiGateway" options="-parameters" />
       <module name="configServer" options="-parameters" />
       <module name="eureka" options="-parameters" />
       <module name="fitness" options="-parameters" />
