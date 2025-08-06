@@ -18,7 +18,16 @@ public class UserService {
 
     public UserResponse register(@Valid RegisterRequest request) {
         if(repository.existsByEmail(request.getEmail())){
-            throw new RuntimeException("Email already exist");
+            User existingUser = repository.findByEmail(request.getEmail());
+            UserResponse UserResponse = new UserResponse();
+            UserResponse.setId(existingUser.getId());
+            UserResponse.setEmail(existingUser.getEmail());
+            UserResponse.setPassword(existingUser.getPassword());
+            UserResponse.setFirstName(existingUser.getFirstName());
+            UserResponse.setLastName(existingUser.getLastName());
+            UserResponse.setCreatedAt(existingUser.getCreatedAt());
+            UserResponse.setUpdatedAt(existingUser.getUpdatedAt());
+            return UserResponse;
         }
 
         User user = new User();
@@ -31,6 +40,7 @@ public class UserService {
         UserResponse UserResponse = new UserResponse();
         UserResponse.setId(saveUser.getId());
         UserResponse.setEmail(saveUser.getEmail());
+        UserResponse.setPassword(saveUser.getPassword());
         UserResponse.setFirstName(saveUser.getFirstName());
         UserResponse.setLastName(saveUser.getLastName());
         UserResponse.setCreatedAt(saveUser.getCreatedAt());
@@ -58,6 +68,6 @@ public class UserService {
 
     public Boolean existByUserId(String userId) {
         log.info("\n Calling user Validation Api for User: {}", userId);
-        return repository.existsById(userId);
+        return repository.existsByKeycloakId(userId);
     }
 }

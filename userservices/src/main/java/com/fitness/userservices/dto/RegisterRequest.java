@@ -15,6 +15,7 @@ public class RegisterRequest {
     @NotBlank(message = "Email is required")
     @Email(message = "Invalid Email Format" )
     private String email;
+    private String keycloakId;
 
     @NotBlank(message = "Password is required")
     @Size(min = 6, message = "Password should be greater than 5")

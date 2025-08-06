@@ -17,6 +17,7 @@ public class UserResponse {
     @Column(name = "Id")
     private String id;
     @Email
+    private String keycloakId;
     private String email;
     private String password;
     private String firstName;
