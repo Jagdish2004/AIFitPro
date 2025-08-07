@@ -20,9 +20,11 @@ public class UserService {
         if(repository.existsByEmail(request.getEmail())){
             User existingUser = repository.findByEmail(request.getEmail());
             UserResponse UserResponse = new UserResponse();
+
             UserResponse.setId(existingUser.getId());
             UserResponse.setEmail(existingUser.getEmail());
             UserResponse.setPassword(existingUser.getPassword());
+            UserResponse.setKeycloakId(existingUser.getKeycloakId());
             UserResponse.setFirstName(existingUser.getFirstName());
             UserResponse.setLastName(existingUser.getLastName());
             UserResponse.setCreatedAt(existingUser.getCreatedAt());
@@ -33,6 +35,7 @@ public class UserService {
         User user = new User();
         user.setEmail(request.getEmail());
         user.setPassword(request.getPassword());
+        user.setKeycloakId(request.getKeycloakId());
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
 
@@ -40,6 +43,7 @@ public class UserService {
         UserResponse UserResponse = new UserResponse();
         UserResponse.setId(saveUser.getId());
         UserResponse.setEmail(saveUser.getEmail());
+        UserResponse.setKeycloakId(saveUser.getKeycloakId());
         UserResponse.setPassword(saveUser.getPassword());
         UserResponse.setFirstName(saveUser.getFirstName());
         UserResponse.setLastName(saveUser.getLastName());
@@ -57,6 +61,7 @@ public class UserService {
         UserResponse UserResponse = new UserResponse();
         UserResponse.setId(user.getId());
         UserResponse.setPassword(user.getPassword());
+        UserResponse.setKeycloakId(user.getKeycloakId());
         UserResponse.setEmail(user.getEmail());
         UserResponse.setFirstName(user.getFirstName());
         UserResponse.setLastName(user.getLastName());
@@ -68,6 +73,7 @@ public class UserService {
 
     public Boolean existByUserId(String userId) {
         log.info("\n Calling user Validation Api for User: {}", userId);
+//        return repository.existsById(userId);
         return repository.existsByKeycloakId(userId);
     }
 }
