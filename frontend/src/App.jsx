@@ -1,7 +1,6 @@
 import './App.css'
 import { BrowserRouter as Router, Navigate,Route, Routes } from 'react-router';
 import { Box, Button } from '@mui/material';
-import { use } from 'react';
 import {useState, useContext, useEffect } from 'react';
 import { setCredentials } from './store/authSlice';
 import { AuthContext } from 'react-oauth2-code-pkce';
@@ -44,9 +43,9 @@ function App() {
           <Box component="section" sx={{ p: 2, border: '1px dashed grey' }}>
           <Routes>
            
-            <Route path="/activities" element={<ActivityPage />} />
+            <Route path="/activities/" element={<ActivityPage />} />
             <Route path="/activities/:id" element={<ActivityDetail />} />
-            <Route path="/" element={token ? <Navigate to="/activities" /> : <div> Login First</div>} />
+            <Route path="/" element={token ? <Navigate to="/activities/" /> : <div> Login First</div>} />
            </Routes>
            </Box>
         )

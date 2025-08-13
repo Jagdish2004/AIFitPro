@@ -1,13 +1,14 @@
 import React from "react";
 import { Box, FormControl, InputLabel, MenuItem, Select, TextField, Button } from '@mui/material';
 import { useState } from 'react';
+import { addActivity } from '../services/api';
 
 
  
 const ActivityForm = ({onActivitiesAdded}) => {
 
     const [activity, setActivity] = useState({
-        title: "RUNNING",
+        type: "RUNNING",
         duration: '',
         caloriesBurned: ''
     });
@@ -17,10 +18,10 @@ const ActivityForm = ({onActivitiesAdded}) => {
     const handleSubmit = async (event) => {
     event.preventDefault();
     try{
-        // await addActivity(activity);
+        await addActivity(activity);
         onActivitiesAdded();
         setActivity({
-        title: "RUNNING",
+        type: "RUNNING",
         duration: '',
         caloriesBurned: ''
         });
@@ -34,7 +35,7 @@ const ActivityForm = ({onActivitiesAdded}) => {
      <Box component="form" onSubmit={handleSubmit} sx={{ mb: 4 }}>
     <FormControl fullWidth sx={{ mb: 2 }}>
         <InputLabel>Activity Type</InputLabel>
-        <Select value={activity.type} onChange={(e) => setActivity({ ...activity, type: e.target.value })}>
+        <Select value={activity.type || ""} onChange={(e) => setActivity({ ...activity, type: e.target.value })}>
             <MenuItem value="RUNNING">Running</MenuItem>
             <MenuItem value="CYCLING">Cycling</MenuItem>
             <MenuItem value="SWIMMING">Swimming</MenuItem>
