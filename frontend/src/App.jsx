@@ -36,11 +36,12 @@ function App() {
            <Button variant='contained' color="#ffff" onClick={() =>{
           logIn();
         }}>login</Button>):(
-          // <div>
-          //   <pre>{JSON.stringify(tokenData,null,2)}</pre>
-          // </div>
+          
 
           <Box component="section" sx={{ p: 2, border: '1px dashed grey' }}>
+            <Button variant='contained' color="#ffff" onClick={() =>{
+                    logOut();
+            }}>logout</Button>
           <Routes>
            
             <Route path="/activities/" element={<ActivityPage />} />
